@@ -6,14 +6,7 @@ public:
 		this->sides_count = 0;
 		name = "Фигура";
 	};
-	int get_a() { return this->a; };
-	int get_b() { return this->b; };
-	int get_c() { return this->c; };
-	int get_d() { return this->d; };
-	int get_A() { return this->A; };
-	int get_B() { return this->B; };
-	int get_C() { return this->C; };
-	int get_D() { return this->D; };
+
 	int get_sides_count() { return this->sides_count; };
 	std::string get_name() { return this->name; };
 	virtual void print_info(Figure *x) {
@@ -25,19 +18,11 @@ public:
 	virtual bool check() { return true; };
 
 protected:
-	int a{};
-	int b{};
-	int c{};
-	int d{};
-	int A{};
-	int B{};
-	int C{};
-	int D{};
+
 	int sides_count{};
 	std::string name{};
 };
 class Triangle : public Figure {
-
 public:
 	Triangle() {};
 	Triangle(int a, int b, int c, int A, int B, int C) {
@@ -51,21 +36,34 @@ public:
 		this->name = "Треугольник";
 	}
 	void print_info(Figure* x) {
-		std::cout << x->get_name() << ":" << std::endl;
-		std::cout << (x->check() ? "Правильная" : "Неправильная") << std::endl;
-		std::cout << "Количество сторон: " << x->get_sides_count() << std::endl;
-		std::cout << "Стороны: " << "a=" << x->get_a() << " b=" << x->get_b() << " c=" << x->get_c() << std::endl;
-		std::cout << "Углы: " << "A=" << x->get_A() << " B=" << x->get_B() << " C=" << x->get_C() << std::endl;
+		std::cout << this->get_name() << ":" << std::endl;
+		std::cout << (this->check() ? "Правильная" : "Неправильная") << std::endl;
+		std::cout << "Количество сторон: " << this->get_sides_count() << std::endl;
+		std::cout << "Стороны: " << "a=" << this->get_a() << " b=" << this->get_b() << " c=" << this->get_c() << std::endl;
+		std::cout << "Углы: " << "A=" << this->get_A() << " B=" << this->get_B() << " C=" << this->get_C() << std::endl;
 		std::cout << std::endl;
 	};
 	bool check() {
-		if ((this->A + this->B + this->C) == 180) {
+		if ((this->A + this->B + this->C) == 180 && (this->sides_count = 3)) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	};
+	int get_a() { return this->a; };
+	int get_b() { return this->b; };
+	int get_c() { return this->c; };
+	int get_A() { return this->A; };
+	int get_B() { return this->B; };
+	int get_C() { return this->C; };
+protected:
+	int a{};
+	int b{};
+	int c{};
+	int A{};
+	int B{};
+	int C{};
 };
 class RightTriangle : public Triangle {
 
@@ -75,7 +73,7 @@ public:
 	
 	};
 	bool check() {
-		if (((this->A + this->B + this->C) == 180) && this->C == 90) {
+		if ((this->Triangle::check()) && this->C == 90) {
 			return true;
 		}
 		else {
@@ -90,7 +88,7 @@ public:
 		name = "Равнобедренный треугольник";
 	};
 	bool check() {
-		if (((this->A + this->B + this->C) == 180) && (this->a == this->c) && (this->A == this->C)) {
+		if ((this->Triangle::check()) && (this->a == this->c) && (this->A == this->C)) {
 			return true;
 		}
 		else {
@@ -104,7 +102,8 @@ public:
 		name = "Равносторонний треугольник";
 	}
 	bool check() {
-		if (((this->A + this->B + this->C) == 180) && ((this->A == this->B) && (this->B == this->C)) && ((this->a == this->b) && (this->b == this->c))) {
+		if ((this->Triangle::check()) && ((this->A == this->B) 
+			&& (this->B == this->C)) && ((this->a == this->b) && (this->b == this->c))) {
 			return true;
 		}
 		else {
@@ -131,11 +130,11 @@ public:
 		this->name = "Четырёхугольник";
 	}
 	void print_info(Figure* x) {
-		std::cout << x->get_name() << ":" << std::endl;
-		std::cout << (x->check() ? "Правильная" : "Неправильная") << std::endl;
-		std::cout << "Количество сторон: " << x->get_sides_count() << std::endl;
-		std::cout << "Стороны: " << "a=" << x->get_a() << " b=" << x->get_b() << " c=" << x->get_c() << " d=" << x->get_d() << std::endl;
-		std::cout << "Углы: " << "A=" << x->get_A() << " B=" << x->get_B() << " C=" << x->get_C() << " D=" << x->get_D() << std::endl;
+		std::cout << this->get_name() << ":" << std::endl;
+		std::cout << (this->check() ? "Правильная" : "Неправильная") << std::endl;
+		std::cout << "Количество сторон: " << this->get_sides_count() << std::endl;
+		std::cout << "Стороны: " << "a=" << this->get_a() << " b=" << this->get_b() << " c=" << this->get_c() << " d=" << this->get_d() << std::endl;
+		std::cout << "Углы: " << "A=" << this->get_A() << " B=" << this->get_B() << " C=" << this->get_C() << " D=" << this->get_D() << std::endl;
 		std::cout << std::endl;
 	};
 	bool check() {
@@ -146,7 +145,23 @@ public:
 			return false;
 		}
 	};
-
+	int get_a() { return this->a; };
+	int get_b() { return this->b; };
+	int get_c() { return this->c; };
+	int get_d() { return this->d; };
+	int get_A() { return this->A; };
+	int get_B() { return this->B; };
+	int get_C() { return this->C; };
+	int get_D() { return this->D; };
+protected:
+	int a{};
+	int b{};
+	int c{};
+	int d{};
+	int A{};
+	int B{};
+	int C{};
+	int D{};
 
 };
 class Parallelogram : public Quadrangle {
@@ -157,8 +172,8 @@ public:
 		this->name = "Параллелограмм";
 	};
 	bool check() {
-		if (((this->A + this->B + this->C + this->D) == 360) 
-			&& (this->sides_count == 4) && (this->a == this->c && this->b == this->d)) 
+		if ((this->Quadrangle::check())  && (this->a == this->c && this->b == this->d) 
+			&& (this->A == this->C && this->B == this->D))
 		{
 			return true;
 		}
@@ -169,17 +184,14 @@ public:
 protected:
 
 };
-class Rectangle : public Quadrangle {
+class Rectangle : public Parallelogram {
 public:
-	Rectangle(int a, int b) :Quadrangle(a, b, a, b, 90, 90, 90, 90) {
+	Rectangle(int a, int b) : Parallelogram(a, b, 90, 90) {
 
 		this->name = "Прямоугольник";
 	};
 	bool check() {
-		if (((this->A + this->B + this->C + this->D) == 360) && (this->sides_count == 4) 
-			&& (this->a == this->c && this->b == this->d)
-			&& (this->A==90 && this->B==90 && this->C==90 && this->D == 90)
-			) {
+		if (this->Parallelogram::check() && (this->A==90 && this->B==90)) {
 			return true;
 		}
 		else {
@@ -187,17 +199,15 @@ public:
 		}
 	};
 };
-class Square : public Quadrangle {
+class Square : public Rectangle {
 
 public:
-	Square(int a) :Quadrangle(a, a, a, a, 90, 90, 90, 90) {
+	Square(int a) :Rectangle(a, a) {
 		this->name = "Квадрат";
 	};
 	bool check() {
-		if (((this->A + this->B + this->C + this->D) == 360) && (this->sides_count == 4) 
-			&& (this->a == this->b && this->b == this->c && this->c == this->d)
-			&& (this->A == 90 && this->B == 90 && this->C == 90 && this->D == 90)
-			) {
+		if (this->Rectangle::check() && this->a == this->b)
+		{
 			return true;
 		}
 		else {
@@ -213,10 +223,8 @@ public:
 		this->name = "Ромб";
 	};
 	bool check() {
-		if (((this->A + this->B + this->C + this->D) == 360) && (this->sides_count == 4)
-			&& (this->a == this->b && this->b == this->c && this->c == this->d)
-			&& (this->A == C && this->B == D)
-			) {
+		if (this->Parallelogram::check() && this->a == this->b)
+			{
 			return true;
 		}
 		else {
